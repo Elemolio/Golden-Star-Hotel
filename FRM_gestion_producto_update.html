@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Producto</title>
+    <link rel="stylesheet" href="formstyle.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Modificar Producto</h2>
+        <form action="producto_update.php" method="POST">
+            <label for="id_producto">ID Producto:</label>
+            <input type="text" id="id_producto" name="id_producto" onblur="fetchProductDetails(this.value)" required>
+            
+            <label for="no_habitacion">Número de Habitación:</label>
+            <input type="text" id="no_habitacion" name="no_habitacion" required>
+            
+            <label for="id_paquete">ID Paquete:</label>
+            <input type="text" id="id_paquete" name="id_paquete" required>
+            
+            <label for="fecha_inicio">Fecha de Inicio:</label>
+            <input type="date" id="fecha_inicio" name="fecha_inicio" required>
+            
+            <label for="fecha_final">Fecha Final:</label>
+            <input type="date" id="fecha_final" name="fecha_final" required>
+            
+            <button type="submit">Modificar</button>
+        </form>
+        <a href="gestion_producto.html" class="button">Regresar</a>
+    </div>
+
+    <script>
+        function fetchProductDetails(id) {
+            if (id === "") {
+                document.getElementById("no_habitacion").value = "";
+                document.getElementById("id_paquete").value = "";
+                document.getElementById("fecha_inicio").value = "";
+                document.getElementById("fecha_final").value = "";
+                return;
+            }
+            fetch('get_product_details.php?id=' + id)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("no_habitacion").value = data.no_habitacion;
+                    document.getElementById("id_paquete").value = data.id_paquete;
+                    document.getElementById("fecha_inicio").value = data.fecha_inicio;
+                    document.getElementById("fecha_final").value = data.fecha_final;
+                });
+        }
+    </script>
+</body>
+</html>
+
+
+

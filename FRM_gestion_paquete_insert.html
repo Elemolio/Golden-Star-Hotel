@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingresar Paquete - Golden Star Hotel</title>
+    <link rel="stylesheet" href="formstyle.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Ingresar Paquete</h2>
+        <form action="ingresar_paquete.php" method="POST">
+            <label for="Plan_entretenimiento">ID Plan de Entretenimiento:</label>
+            <input type="number" id="Plan_entretenimiento" name="Plan_entretenimiento" required>
+
+            <label for="Plan_comida">ID Plan de Comida:</label>
+            <input type="number" id="Plan_comida" name="Plan_comida" required>
+
+            <button type="submit">Ingresar</button>
+        </form>
+        <a href="gestion_paquetes.html" class="button">Regresar</a>
+    </div>
+</body>
+</html>
+
+

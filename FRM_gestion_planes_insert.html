@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insertar Plan de Entretenimiento - Golden Star Hotel</title>
+    <link rel="stylesheet" href="formstyle.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Insertar Plan de Entretenimiento</h1>
+        <form action="planes_insert.php" method="post">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            
+            <label for="descripcion">Descripción:</label>
+            <input type="text" id="descripcion" name="descripcion" required>
+            
+            <button type="submit" class="button">Insertar</button>
+        </form>
+        <a href="gestion_planes.html" class="back-button">Regresar</a>
+    </div>
+</body>
+</html>
+

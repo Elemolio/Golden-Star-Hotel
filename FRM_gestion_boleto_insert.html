@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingresar Boleto - Golden Star Hotel</title>
+    <link rel="stylesheet" href="formstyle.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Ingresar Boleto</h2>
+        <form action="ingresar_boleto.php" method="POST">
+            <label for="cajero">Cajero:</label>
+            <input type="number" id="cajero" name="cajero" required>
+            <label for="cliente">Cliente:</label>
+            <input type="number" id="cliente" name="cliente" required>
+            <label for="producto">Producto:</label>
+            <input type="number" id="producto" name="producto" required>
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" name="precio" required>
+            <label for="caducidad">Caducidad:</label>
+            <input type="date" id="caducidad" name="caducidad" required>
+            <button type="submit">Ingresar</button>
+        </form>
+        <a href="gestion_boleto.html" class="button">Regresar</a>
+    </div>
+</body>
+</html>

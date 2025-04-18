@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insertar Habitación</title>
+    <link rel="stylesheet" href="formstyle.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Insertar Habitación</h2>
+        <form action="habitacion_insert.php" method="POST">
+            <label for="no_habitacion">Número de Habitación:</label>
+            <input type="text" id="no_habitacion" name="no_habitacion" required>
+            
+            <label for="capacidad">Capacidad:</label>
+            <input type="number" id="capacidad" name="capacidad" required>
+            
+            <label for="estado">Estado:</label>
+            <select id="estado" name="estado" required>
+                <option value="0">Disponible</option>
+                <option value="1">Ocupada</option>
+            </select>
+            
+            <button type="submit">Insertar</button>
+        </form>
+        <a href="gestion_habitacion.html" class="button">Regresar</a>
+    </div>
+</body>
+</html>
+
+
+
+

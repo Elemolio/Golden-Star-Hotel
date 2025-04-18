@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Paquete - Golden Star Hotel</title>
+    <link rel="stylesheet" href="formstyle.css">
+    <script>
+        function obtenerPaquete() {
+            var id_paquete = document.getElementById('ID_paquete').value;
+            if (id_paquete) {
+                fetch(`get_paquete.php?id_paquete=${id_paquete}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data) {
+                            var detalles = `
+                                <table>
+                                    <tr><th>ID Paquete:</th><td>${data.ID_paquete}</td></tr>
+                                    <tr><th>Plan de Entretenimiento:</th><td>${data.Plan_entretenimiento}</td></tr>
+                                    <tr><th>Plan de Comida:</th><td>${data.Plan_comida}</td></tr>
+                                </table>
+                            `;
+                            document.getElementById('detallesPaquete').innerHTML = detalles;
+                        } else {
+                            document.getElementById('detallesPaquete').innerHTML = 'No se encontró un paquete con ese ID.';
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Eliminar Paquete</h2>
+        <form onsubmit="event.preventDefault(); obtenerPaquete();">
+            <label for="ID_paquete">ID Paquete:</label>
+            <input type="number" id="ID_paquete" name="ID_paquete" required>
+            <button type="submit">Buscar</button>
+        </form>
+
+        <div id="detallesPaquete" class="detalles-paquete"></div>
+
+        <form action="paquete_delete.php" method="post">
+            <input type="hidden" id="ID_paquete_eliminar" name="ID_paquete">
+            <button type="submit">Eliminar</button>
+        </form>
+
+        <a href="gestion_paquetes.html" class="button">Regresar</a>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Huésped - Golden Star Hotel</title>
+    <link rel="stylesheet" href="formstyle.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Eliminar Huésped</h1>
+        <form id="deleteForm" action="huesped_delete.php" method="post">
+            <label for="ID_huesped">ID Huésped:</label>
+            <input type="number" id="ID_huesped" name="ID_huesped" required oninput="fetchHuesped()">
+            <button type="submit" class="button">Eliminar</button>
+        </form>
+        <div id="huespedDetails"></div>
+        <a href="gestion_huesped.html" class="back-button">Regresar</a>
+    </div>
+    
+    <script>
+        function fetchHuesped() {
+            const id = document.getElementById('ID_huesped').value;
+            if (id) {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', 'get_huesped.php?id=' + id, true);
+                xhr.onload = function() {
+                    if (this.status === 200) {
+                        const details = document.getElementById('huespedDetails');
+                        if (this.responseText) {
+                            details.innerHTML = '<h2>Detalles del Huésped</h2>' + this.responseText;
+                        } else {
+                            details.innerHTML = '<p>Huésped no encontrado.</p>';
+                        }
+                    }
+                };
+                xhr.send();
+            }
+        }
+    </script>
+</body>
+</html>
+

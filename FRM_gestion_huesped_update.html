@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Huésped</title>
+    <link rel="stylesheet" href="formstyle.css">
+    <script>
+        function obtenerHuesped() {
+            var id_huesped = document.getElementById('ID_huesped').value;
+            if (id_huesped) {
+                fetch(`get_huesped2.php?id_huesped=${id_huesped}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data) {
+                            document.getElementById('Nombre').value = data.Nombre;
+                            document.getElementById('Apellido').value = data.Apellido;
+                            document.getElementById('Correo').value = data.Correo;
+                            document.getElementById('Contrasena').value = data.Contrasena;
+                            document.getElementById('ID_boleto').value = data.ID_boleto;
+                        } else {
+                            alert('No se encontró un huésped con ese ID.');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Modificar Huésped</h2>
+        <form action="huesped_update.php" method="post">
+            <label for="ID_huesped">ID Huésped:</label>
+            <input type="number" id="ID_huesped" name="ID_huesped" required onblur="obtenerHuesped()">
+            
+            <label for="Nombre">Nombre:</label>
+            <input type="text" id="Nombre" name="Nombre" required>
+            
+            <label for="Apellido">Apellido:</label>
+            <input type="text" id="Apellido" name="Apellido" required>
+            
+            <label for="Correo">Correo:</label>
+            <input type="email" id="Correo" name="Correo" required>
+            
+            <label for="Contrasena">Contraseña:</label>
+            <input type="password" id="Contrasena" name="Contrasena" required>
+            
+            <label for="ID_boleto">ID Boleto:</label>
+            <input type="number" id="ID_boleto" name="ID_boleto" required>
+            
+            <button type="submit">Modificar Huésped</button>
+        </form>
+        <a href="gestion_huesped.html" class="button">Volver</a>
+    </div>
+</body>
+</html>
+
+
+

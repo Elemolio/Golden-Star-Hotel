@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Producto - Golden Star Hotel</title>
+    <link rel="stylesheet" href="formstyle.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Eliminar Producto</h1>
+        <form id="deleteForm" action="producto_delete.php" method="post">
+            <label for="ID_producto">ID Producto:</label>
+            <input type="number" id="ID_producto" name="ID_producto" required oninput="fetchProducto()">
+            <button type="submit" class="button">Eliminar</button>
+        </form>
+        <div id="productoDetails"></div>
+        <a href="gestion_producto.html" class="back-button">Regresar</a>
+    </div>
+    
+    <script>
+        function fetchProducto() {
+            const id = document.getElementById('ID_producto').value;
+            if (id) {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', 'get_producto.php?id=' + id, true);
+                xhr.onload = function() {
+                    if (this.status === 200) {
+                        const details = document.getElementById('productoDetails');
+                        if (this.responseText) {
+                            const producto = JSON.parse(this.responseText);
+                            details.innerHTML = '<h2>Detalles del Producto</h2>' +
+                                                '<p><strong>No. Habitación:</strong> ' + producto.No_Habit + '</p>' +
+                                                '<p><strong>Paquete:</strong> ' + producto.Paquete + '</p>' +
+                                                '<p><strong>Fecha Inicio:</strong> ' + producto.Fecha_Inicio + '</p>' +
+                                                '<p><strong>Fecha Final:</strong> ' + producto.Fecha_final + '</p>';
+                        } else {
+                            details.innerHTML = '<p>Producto no encontrado.</p>';
+                        }
+                    }
+                };
+                xhr.send();
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Plan de Entretenimiento - Golden Star Hotel</title>
+    <link rel="stylesheet" href="formstyle.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Eliminar Plan de Entretenimiento</h1>
+        <form id="deleteForm" action="planes_delete.php" method="post">
+            <label for="ID_entretenimiento">ID Plan de Entretenimiento:</label>
+            <input type="number" id="ID_entretenimiento" name="ID_entretenimiento" required oninput="fetchPlan()">
+            <button type="submit" class="button">Eliminar</button>
+        </form>
+        <div id="planDetails"></div>
+        <a href="gestion_planes.html" class="back-button">Regresar</a>
+    </div>
+    
+    <script>
+        function fetchPlan() {
+            const id = document.getElementById('ID_entretenimiento').value;
+            if (id) {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', 'get_plan.php?id=' + id, true);
+                xhr.onload = function() {
+                    if (this.status === 200) {
+                        const details = document.getElementById('planDetails');
+                        if (this.responseText) {
+                            const plan = JSON.parse(this.responseText);
+                            details.innerHTML = '<h2>Detalles del Plan de Entretenimiento</h2>' +
+                                                '<p><strong>Nombre:</strong> ' + plan.nombre + '</p>' +
+                                                '<p><strong>Descripción:</strong> ' + plan.descripcion + '</p>';
+                        } else {
+                            details.innerHTML = '<p>Plan de entretenimiento no encontrado.</p>';
+                        }
+                    }
+                };
+                xhr.send();
+            }
+        }
+    </script>
+</body>
+</html>
+

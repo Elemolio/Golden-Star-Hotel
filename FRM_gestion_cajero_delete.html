@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Cajero - Golden Star Hotel</title>
+    <link rel="stylesheet" href="formstyle.css">
+    <script>
+        function fetchCajeroDetails() {
+            var usuario = document.getElementById("usuario").value;
+            if (usuario) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "fetch_cajero.php?usuario=" + usuario, true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var data = JSON.parse(xhr.responseText);
+                        if (data.success) {
+                            document.getElementById("nombre").innerText = data.Nombre;
+                            document.getElementById("apellido").innerText = data.Apellido;
+                            document.getElementById("correo").innerText = data.Correo;
+                        } else {
+                            alert("Cajero no encontrado");
+                            document.getElementById("nombre").innerText = "No disponible";
+                            document.getElementById("apellido").innerText = "No disponible";
+                            document.getElementById("correo").innerText = "No disponible";
+                        }
+                    }
+                };
+                xhr.send();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Eliminar Cajero</h2>
+        <form action="eliminar_cajero.php" method="POST">
+            <label for="usuario">Número de Usuario:</label>
+            <input type="text" id="usuario" name="usuario" required oninput="fetchCajeroDetails()">
+            <button type="submit">Eliminar</button>
+        </form>
+        <div>
+            <h3>Detalles del Cajero</h3>
+            <p>Nombre: <span id="nombre">No disponible</span></p>
+            <p>Apellido: <span id="apellido">No disponible</span></p>
+            <p>Correo: <span id="correo">No disponible</span></p>
+        </div>
+        <a href="gestion_cajero.html" class="button">Regresar</a>
+    </div>
+</body>
+</html>
+

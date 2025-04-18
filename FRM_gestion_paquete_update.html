@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Paquete - Golden Star Hotel</title>
+    <link rel="stylesheet" href="formstyle.css">
+    <script>
+        function obtenerPaquete() {
+            var id_paquete = document.getElementById('ID_paquete').value;
+            if (id_paquete) {
+                fetch(`get_paquete.php?id_paquete=${id_paquete}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data) {
+                            document.getElementById('Plan_entretenimiento').value = data.Plan_entretenimiento;
+                            document.getElementById('Plan_comida').value = data.Plan_comida;
+
+                            var detalles = `
+                                <table>
+                                    <tr><th>ID Paquete:</th><td>${data.ID_paquete}</td></tr>
+                                    <tr><th>Plan de Entretenimiento:</th><td>${data.Plan_entretenimiento}</td></tr>
+                                    <tr><th>Plan de Comida:</th><td>${data.Plan_comida}</td></tr>
+                                </table>
+                            `;
+                            document.getElementById('detallesPaquete').innerHTML = detalles;
+                        } else {
+                            document.getElementById('detallesPaquete').innerHTML = 'No se encontró un paquete con ese ID.';
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Modificar Paquete</h2>
+        <form action="modificar_paquete.php" method="post">
+            <label for="ID_paquete">ID Paquete:</label>
+            <input type="number" id="ID_paquete" name="ID_paquete" required onblur="obtenerPaquete()">
+            
+            <label for="Plan_entretenimiento">Plan de Entretenimiento:</label>
+            <input type="number" id="Plan_entretenimiento" name="Plan_entretenimiento" required>
+            
+            <label for="Plan_comida">Plan de Comida:</label>
+            <input type="number" id="Plan_comida" name="Plan_comida" required>
+            
+            <button type="submit">Modificar</button>
+        </form>
+
+        <div id="detallesPaquete" class="detalles-paquete"></div>
+
+        <a href="gestion_paquetes.html" class="button">Regresar</a>
+    </div>
+</body>
+</html>
+

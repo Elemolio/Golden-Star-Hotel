@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Cajero - Golden Star Hotel</title>
+    <link rel="stylesheet" href="formstyle.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function cargarDatos() {
+            var usuario = $('#id_usuario').val();
+            $.ajax({
+                url: 'obtener_cajero.php',
+                type: 'POST',
+                data: { usuario: usuario },
+                success: function(data) {
+                    var cajero = JSON.parse(data);
+                    if (cajero.Usuario) {
+                        $('#nombre').val(cajero.Nombre);
+                        $('#apellido').val(cajero.Apellido);
+                        $('#correo').val(cajero.Correo);
+                    } else {
+                        alert("Cajero no encontrado");
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Modificar Cajero</h2>
+        <form action="modificar_cajero.php" method="POST">
+            <label for="usuario">Número de Usuario:</label>
+            <input type="text" id="id_usuario" name="id_usuario" required onblur="cargarDatos()">
+
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" required>
+
+            <label for="correo">Correo:</label>
+            <input type="email" id="correo" name="correo" required>
+
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" id="contrasena" name="contrasena">
+
+            <button type="submit">Modificar</button>
+        </form>
+        <a href="gestion_cajero.html" class="back-button">Regresar</a>
+    </div>
+</body>
+</html>

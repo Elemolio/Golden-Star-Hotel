@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservar Paquete - Golden Star Hotel</title>
+    <link rel="stylesheet" href="newformstyle.css">
+    <style>
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        margin-bottom: 15px;
+    }
+    
+    .button:hover {
+        background-color: #0056b3;
+    }
+
+</style>
+    
+</head>
+<body>
+    <div class="container">
+        <h2>Reservar Paquete</h2>
+        <a href="habitaciones_disponibles.php" class="button">Ver Habitaciones Disponibles</a>
+        <form action="reservar.php" method="POST">
+            <label for="no_habitacion">Número de Habitación:</label>
+            <input type="text" id="no_habitacion" name="no_habitacion" required>
+
+            <a href="view_planes.php" class="button">Ver Planes</a>
+            <label for="id_paquete">ID Paquete:</label>
+            <input type="text" id="id_paquete" name="id_paquete" required>
+
+            <label for="fecha_inicio">Fecha de Inicio:</label>
+            <input type="date" id="fecha_inicio" name="fecha_inicio" required>
+
+            <label for="fecha_final">Fecha Final:</label>
+            <input type="date" id="fecha_final" name="fecha_final" required>
+
+            <button type="submit">Reservar</button>
+        </form>
+        <a href="dashboard.php" >Regresar</a>
+    </div>
+</body>
+</html>

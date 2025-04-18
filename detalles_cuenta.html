@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de la Cuenta - Golden Star Hotel</title>
+    <link rel="stylesheet" href="indicestyle.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Detalles de la Cuenta</h2>
+        <div id="detallesCuenta" class="detalles-cuenta"></div>
+        <div id="error" class="error"></div>
+        <a href="indice_cajero.html" class="button">Regresar</a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('detalles_cuenta.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById('detallesCuenta').innerHTML = data.error;
+                    } else {
+                        var detalles = `
+                            <table>
+                                <tr><th>ID Cajero:</th><td>${data.ID_cajero}</td></tr>
+                                <tr><th>Nombre:</th><td>${data.Nombre}</td></tr>
+                                <tr><th>Apellido:</th><td>${data.Apellido}</td></tr>
+                                <tr><th>Correo:</th><td>${data.Correo}</td></tr>
+                            </table>
+                        `;
+                        document.getElementById('detallesCuenta').innerHTML = detalles;
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('error').innerHTML = 'Error: ' + error.message;
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+</html>

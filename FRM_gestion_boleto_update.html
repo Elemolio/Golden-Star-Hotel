@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Boleto - Golden Star Hotel</title>
+    <link rel="stylesheet" href="formstyle.css">
+    <script>
+        function fetchBoletoDetails() {
+            var idBoleto = document.getElementById("id_boleto").value;
+            if (idBoleto) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "fetch_boleto.php?id_boleto=" + idBoleto, true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var data = JSON.parse(xhr.responseText);
+                        if (data.success) {
+                            document.getElementById("cajero").value = data.Cajero;
+                            document.getElementById("cliente").value = data.Cliente;
+                            document.getElementById("producto").value = data.Producto;
+                            document.getElementById("precio").value = data.Precio;
+                            document.getElementById("caducidad").value = data.Caducidad;
+                        } else {
+                            alert("Boleto no encontrado");
+                        }
+                    }
+                };
+                xhr.send();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Modificar Boleto</h2>
+        <form action="modificar_boleto.php" method="POST">
+            <label for="id_boleto">ID Boleto:</label>
+            <input type="number" id="id_boleto" name="id_boleto" required oninput="fetchBoletoDetails()">
+            <label for="cajero">Cajero:</label>
+            <input type="number" id="cajero" name="cajero" required>
+            <label for="cliente">Cliente:</label>
+            <input type="number" id="cliente" name="cliente" required>
+            <label for="producto">Producto:</label>
+            <input type="number" id="producto" name="producto" required>
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" name="precio" required>
+            <label for="caducidad">Caducidad:</label>
+            <input type="date" id="caducidad" name="caducidad" required>
+            <button type="submit">Modificar</button>
+        </form>
+        <a href="gestion_boleto.html" class="button">Regresar</a>
+    </div>
+</body>
+</html>
+
